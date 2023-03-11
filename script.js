@@ -34,7 +34,7 @@ function renderClientMessage(e) {
   e.preventDefault();
   let clientMessage = inputEvent.target.value;
   // 1.) run some input validation on client input
-  if (Number(clientMessage) > 99) {
+  if (!clientMessage || Number(clientMessage) > 99) {
     return;
   }
 
