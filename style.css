@@ -29,6 +29,14 @@ body {
   background-color: var(--Background);
 }
 
+.show {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}
+
 .header {
   width: 100vw;
   display: flex;
@@ -177,6 +185,51 @@ body {
   border-left: 1px solid var(--Color);
 }
 
+.input-board {
+  width: 80vw;
+  height: auto;
+  color: var(--Color);
+  padding: 2rem;
+  background-color: var(--Background);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--Color);
+}
+
+.form-input {
+  appearance: none;
+  outline: none;
+  border: none;
+  width: 80%;
+  padding: 1rem;
+}
+
+.btn-send-overlay {
+  width: 22%;
+  color: var(--Background);
+  background-color: var(--Color);
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.5;
+  filter: blur(0.2rem);
+  background-color: #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
 @media (min-width: 37.5em) {
   .main {
     max-height: 80vh;
@@ -188,5 +241,9 @@ body {
 
   .btn-send {
     width: 10%;
+  }
+
+  .btn-send-overlay {
+    width: 20%;
   }
 }
