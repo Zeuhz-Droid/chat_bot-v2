@@ -86,10 +86,9 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
   const options = {
     method,
     credentials: "include",
-    // withCredentials: true,
     headers: {
+      "content-Type": "application/json",
       Accept: "application/json",
-      "Content-Type": "application/json",
     },
   };
 
@@ -97,11 +96,9 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
 
   method == "POST" ? (options.body = body) : "";
 
-  console.log(options);
-
   const res = await fetch(
     `
-  http://localhost:3030/api/v1/chatbot/${id}/${endpoint}`,
+  http://localhost:3030/api/v1/chatbot/${id}${endpoint ? "/" : ""}${endpoint}`,
     options
   );
 
@@ -125,6 +122,7 @@ function displayData(data) {
 
   if (!dataObj) return "";
 
+  // constructs order instructions from server
   if (dataObj.instructions) {
     const p = document.createElement("p");
     dataObj.instructions.forEach((el) => {
@@ -136,6 +134,7 @@ function displayData(data) {
     return p.innerHTML;
   }
 
+  // constructs list of items from servere
   if (dataObj.Items) {
     const p = document.createElement("p");
     dataObj.Items.forEach((el) => {
@@ -144,6 +143,7 @@ function displayData(data) {
     return p.innerHTML;
   }
 
+  // constructs order history from server
   if (dataObj.orders) {
     const div = document.createElement("div");
     dataObj.orders.forEach((el) => {
@@ -164,7 +164,7 @@ function displayData(data) {
     return div.innerHTML;
   }
 
-  // select item
+  // select an item
   if (dataObj.order) {
     const div = document.createElement("div");
     let count = 0;
