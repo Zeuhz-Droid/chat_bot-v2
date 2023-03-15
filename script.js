@@ -41,23 +41,36 @@ formChatbox.addEventListener("submit", async (e) => {
   // 1.) run input validation on client input
   let clientMessage = e.target.elements["chatbox-input"].value;
 
-  if (!clientMessage || Number(clientMessage) > 99) {
-    return;
-  }
-
   renderMessage(clientMessage);
+
+  if (
+    !clientMessage ||
+    Number(clientMessage) > 99 ||
+    (clientMessage > 10 && clientMessage < 97)
+  ) {
+    renderServerMessage({
+      message: `Please make a request using bot instructions`,
+    });
+  }
 
   e.target.elements["chatbox-input"].value = "";
 
-  if (present_id == 1) {
+  const routes = ["99", "98", "97", "0"];
+
+  if (present_id == 1 && clientMessage && !routes.includes(clientMessage)) {
     data = await makeCallToAPI(present_id, clientMessage);
   }
 
-  if (clientMessage == 1) {
+  if (!present_id && clientMessage == "1")
+    data = await makeCallToAPI(clientMessage);
+
+  if (routes.includes(clientMessage)) {
     data = await makeCallToAPI(clientMessage);
   }
 
   renderServerMessage(data);
+
+  if (clientMessage == "1") present_id = clientMessage;
 });
 
 function showMenu() {
@@ -107,6 +120,8 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
 
 function renderServerMessage(data) {
   const messageHTML = displayData(data);
+  const messages = ["Order cancelled😓.", "Order Placed👍."];
+  if (messages.includes(data.message)) present_id = "";
   const markup = `
     <div class="msg server-message">
       <p>${data.message}</p>
@@ -146,15 +161,14 @@ function displayData(data) {
   // constructs order history from server
   if (dataObj.orders) {
     const div = document.createElement("div");
+    let count = 0;
     dataObj.orders.forEach((el) => {
       const markup = `
         <div> 
-          <span>${el.id}. ${el.dateCreated}</span>
-          <p>You Bought ${el.itemsCount} items</p>
-          <p>${el.items.forEach((elem) => {
-            `${elem.items},`;
-          })}</p>
-          <span>Total Amount: ${el.amount}</span>
+          <span>${++count}. ${el.dateCreated}</span>
+          <p> <em>*</em> You Bought ${el.itemsCount} items</p>
+          <p> <em>*</em> ${el.items.map((elem) => ` ${elem.item}`)}</p>
+          <span> <em>*</em> Total Amount: $${el.amount}</span>
         </div>
         <br/>
       `;
@@ -168,20 +182,40 @@ function displayData(data) {
   if (dataObj.order) {
     const div = document.createElement("div");
     let count = 0;
-    dataObj.order.forEach((el) => {
-      const markup = `
+    console.log(dataObj.order);
+
+    const { itemsCount, items, amount } = dataObj.order;
+
+    const markup = `
         <div> 
-          <span>${el.id}. ${el.dateCreated}</span>
-          <p>You Bought ${el.itemsCount} items</p>
-          <p>${el.items.forEach((elem) => {
-            `${count++}. ${elem.items} - $${elem.amount}\n`;
-          })}</p>
-          <span>Total Amount: ${el.amount}</span>
+          <p>${itemsCount} item(s) selected</p>
+          <span>Total Amount: $${amount}</span>
         </div>
         <br/>
       `;
-      div.insertAdjacentHTML("beforeend", markup);
-    });
+    div.insertAdjacentHTML("beforeend", markup);
+
+    return div.innerHTML;
+  }
+
+  // select an item
+  if (dataObj.currentOrder) {
+    const div = document.createElement("div");
+    let count = 0;
+
+    const { itemsCount, items, amount } = dataObj.currentOrder;
+
+    const markup = `
+        <div> 
+          <p>${itemsCount} item(s) selected</p>
+           <p>${items.map(
+             (elem) => `${++count}. ${elem.item} - $${elem.amount}\n`
+           )}</p>
+          <span>Total Amount: $${amount}</span>
+        </div>
+        <br/>
+      `;
+    div.insertAdjacentHTML("beforeend", markup);
 
     return div.innerHTML;
   }
