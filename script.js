@@ -26,6 +26,8 @@ formOverlay.addEventListener("submit", async (e) => {
   e.preventDefault();
   username = e.target.elements["form-overlay-input"].value;
 
+  if (!username) return;
+
   if (username && username.length > 1) {
     overlay.classList.add("hide");
     inputBoard.classList.add("hide");
