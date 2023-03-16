@@ -57,20 +57,22 @@ formChatbox.addEventListener("submit", async (e) => {
 
   const routes = ["99", "98", "97", "0"];
 
-  if (present_id == 1 && clientMessage && !routes.includes(clientMessage)) {
-    data = await makeCallToAPI(present_id, clientMessage);
+  if (clientMessage) {
+    if (present_id == 1 && clientMessage && !routes.includes(clientMessage)) {
+      data = await makeCallToAPI(present_id, clientMessage);
+    }
+
+    if (!present_id && clientMessage == "1")
+      data = await makeCallToAPI(clientMessage);
+
+    if (routes.includes(clientMessage)) {
+      data = await makeCallToAPI(clientMessage);
+    }
+
+    renderServerMessage(data);
+
+    if (clientMessage == "1") present_id = clientMessage;
   }
-
-  if (!present_id && clientMessage == "1")
-    data = await makeCallToAPI(clientMessage);
-
-  if (routes.includes(clientMessage)) {
-    data = await makeCallToAPI(clientMessage);
-  }
-
-  renderServerMessage(data);
-
-  if (clientMessage == "1") present_id = clientMessage;
 });
 
 function showMenu() {
