@@ -100,11 +100,10 @@ function renderMessage(message) {
 async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
   const options = {
     method,
-    credentials: "include",
-    withCredentials: true,
     headers: {
       "content-Type": "application/json",
     },
+    credentials: "include",
   };
 
   const body = JSON.stringify({ username });
