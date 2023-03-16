@@ -41,7 +41,7 @@ formChatbox.addEventListener("submit", async (e) => {
   // 1.) run input validation on client input
   let clientMessage = e.target.elements["chatbox-input"].value;
 
-  if (clientMessage) renderMessage(clientMessage);
+  renderMessage(clientMessage);
 
   if (
     !clientMessage ||
@@ -101,6 +101,7 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
   const options = {
     method,
     credentials: "include",
+    withCredentials: true,
     headers: {
       "content-Type": "application/json",
       Accept: "application/json",
@@ -113,7 +114,9 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
 
   const res = await fetch(
     `
-  http://localhost:3030/api/v1/chatbot/${id}${endpoint ? "/" : ""}${endpoint}`,
+  http://localhost:3030/api/v1/chatbot${id ? "/" : ""}${id}${
+      endpoint ? "/" : ""
+    }${endpoint}`,
     options
   );
 
