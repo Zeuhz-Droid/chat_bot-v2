@@ -98,26 +98,33 @@ function renderMessage(message) {
 }
 
 async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
-  const options = {
-    method,
-    headers: {
-      "content-Type": "application/json",
-    },
-    credentials: "include",
-  };
+  try {
+    const options = {
+      method,
+      credentials: "include",
+      withCredentials: true,
+      headers: {
+        "content-Type": "application/json",
+      },
+    };
 
-  const body = JSON.stringify({ username });
+    const body = JSON.stringify({ username });
 
-  method == "POST" ? (options.body = body) : "";
+    method == "POST" ? (options.body = body) : "";
 
-  const res = await fetch(
-    `http://localhost:3030/api/v1/chatbot${id ? "/" : ""}${id}${
-      endpoint ? "/" : ""
-    }${endpoint}`,
-    options
-  );
+    const res = await fetch(
+      `http://localhost:3030/api/v1/chatbot${id ? "/" : ""}${id}${
+        endpoint ? "/" : ""
+      }${endpoint}`,
+      options
+    );
 
-  return await res.json();
+    return await res.json();
+  } catch (error) {
+    renderServerMessage({
+      message: `The server is down at this time, please try again later`,
+    });
+  }
 }
 
 function renderServerMessage(data) {
