@@ -113,9 +113,9 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
     method == "POST" ? (options.body = body) : "";
 
     const res = await fetch(
-      `https://zeuhz-orderbot-droid.onrender.com/api/v1/chatbot${
-        id ? "/" : ""
-      }${id}${endpoint ? "/" : ""}${endpoint}`,
+      `http://localhost:3030/api/v1/chatbot${id ? "/" : ""}${id}${
+        endpoint ? "/" : ""
+      }${endpoint}`,
       options
     );
 
