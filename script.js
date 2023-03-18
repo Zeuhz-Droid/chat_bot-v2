@@ -48,12 +48,13 @@ formChatbox.addEventListener("submit", async (e) => {
 
   loading(data, renderLoader);
   const dots = document.querySelector(".dots");
+  const routes = ["99", "98", "97", "0"];
 
   if (
     Number(clientMessage) > 99 ||
     (clientMessage > numOfServerItems && clientMessage < 97) ||
     isNaN(clientMessage) ||
-    (!present_id && clientMessage != 1)
+    (!present_id && clientMessage != 1 && !routes.includes(clientMessage))
   ) {
     setTimeout(async () => {
       removeLoader(dots);
@@ -69,8 +70,6 @@ formChatbox.addEventListener("submit", async (e) => {
   }
 
   e.target.elements["chatbox-input"].value = "";
-
-  const routes = ["99", "98", "97", "0"];
 
   if (clientMessage) {
     if (present_id == 1 && clientMessage && !routes.includes(clientMessage)) {
