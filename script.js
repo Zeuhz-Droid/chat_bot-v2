@@ -33,7 +33,8 @@ formOverlay.addEventListener("submit", async (e) => {
 
   data = await makeCallToAPI("", "", "POST", username);
 
-  if (data) removeLoader(dots);
+  removeLoader(dots);
+
   renderServerMessage(data);
   data = "";
 });
@@ -57,7 +58,10 @@ formChatbox.addEventListener("submit", async (e) => {
       renderServerMessage({
         message: `Please make a request using bot instructions`,
       });
-    }, 2000);
+      removeLoader(dots);
+    }, 1500);
+    e.target.elements["chatbox-input"].value = "";
+    return;
   }
 
   e.target.elements["chatbox-input"].value = "";
@@ -76,7 +80,8 @@ formChatbox.addEventListener("submit", async (e) => {
       data = await makeCallToAPI(clientMessage);
     }
 
-    if (data) removeLoader(dots);
+    removeLoader(dots);
+
     renderServerMessage(data);
 
     if (clientMessage == "1") present_id = clientMessage;
