@@ -1,7 +1,3 @@
-//CONNECT TO SOCKET
-
-// const socket = io();
-
 const main = document.querySelector(".main");
 const overlay = document.querySelector(".overlay");
 const inputBoard = document.querySelector(".input-board");
@@ -20,7 +16,10 @@ const btnSend = document.querySelector(".btn-send");
 btnMenu.addEventListener("click", showMenu);
 btnMenuCancel.addEventListener("click", hideMenu);
 
-let data, username, present_id;
+let data,
+  username,
+  present_id,
+  numOfServerItems = 10;
 //  DEALING WITH THE OVERLAY
 formOverlay.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -45,7 +44,7 @@ formChatbox.addEventListener("submit", async (e) => {
 
   if (
     Number(clientMessage) > 99 ||
-    (clientMessage > 10 && clientMessage < 97) ||
+    (clientMessage > numOfServerItems && clientMessage < 97) ||
     isNaN(clientMessage)
   ) {
     renderServerMessage({

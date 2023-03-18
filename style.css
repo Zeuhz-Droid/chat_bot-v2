@@ -41,12 +41,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--Background);
-}
-
-.header {
   padding: 2rem 3rem;
+  color: var(--Background);
   background-color: var(--Color);
+  opacity: 0.9;
 }
 
 .header-logo {
@@ -102,13 +100,15 @@ body {
 /*  MAIN SECTION FOR CLIENT AND SERVER*/
 .main {
   margin: auto;
-  width: 90vw;
   height: calc(100vh - 8rem - 8rem);
   max-height: 73vh;
+  padding: 0 3rem;
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column-reverse;
   gap: 1rem;
   color: #ffffff;
+  background-color: var(--Color);
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
