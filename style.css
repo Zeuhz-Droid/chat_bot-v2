@@ -265,4 +265,8 @@ body {
   .btn-send-overlay {
     width: 20%;
   }
+
+  .footer {
+    bottom: 0;
+  }
 }
