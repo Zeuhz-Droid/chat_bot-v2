@@ -47,9 +47,11 @@ formChatbox.addEventListener("submit", async (e) => {
     (clientMessage > numOfServerItems && clientMessage < 97) ||
     isNaN(clientMessage)
   ) {
-    renderServerMessage({
-      message: `Please make a request using bot instructions`,
-    });
+    setTimeout(() => {
+      renderServerMessage({
+        message: `Please make a request using bot instructions`,
+      });
+    }, 2000);
   }
 
   e.target.elements["chatbox-input"].value = "";
