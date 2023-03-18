@@ -106,6 +106,9 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
       withCredentials: true,
       headers: {
         "content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin":
+          "https://zeuhz-orderbotconsumer-droid.netlify.app",
       },
     };
 
