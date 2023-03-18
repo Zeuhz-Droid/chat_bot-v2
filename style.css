@@ -251,6 +251,46 @@ body {
   z-index: 10;
 }
 
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  height: 0.8rem;
+  width: 0.8rem;
+  border-radius: 50%;
+  background-color: var(--client-text-color);
+  opacity: 0.8;
+}
+
+.dot {
+  animation: load 0.5s linear infinite;
+}
+
+.dot-2 {
+  animation-delay: 0.15s;
+}
+
+.dot-3 {
+  animation-delay: 0.3s;
+}
+
+@keyframes load {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-0.5rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @media (min-width: 37.5em) {
   .main {
     max-height: 80vh;

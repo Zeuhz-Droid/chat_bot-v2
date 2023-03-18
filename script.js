@@ -9,10 +9,6 @@ const btnMenu = document.querySelector(".btn-menu");
 const btnMenuCancel = document.querySelector(".btn-cancel");
 const formChatbox = document.querySelector(".form-chatbox");
 
-// INPUT ELEMENTS FOR CLIENTS
-const chatInput = document.querySelector(".chatbox-input");
-const btnSend = document.querySelector(".btn-send");
-
 btnMenu.addEventListener("click", showMenu);
 btnMenuCancel.addEventListener("click", hideMenu);
 
@@ -21,9 +17,14 @@ let data,
   present_id,
   numOfServerItems = 10;
 //  DEALING WITH THE OVERLAY
+
 formOverlay.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   username = e.target.elements["form-overlay-input"].value;
+
+  loading(data, renderLoader);
+  const dots = document.querySelector(".dots");
 
   if (!username) return;
 
@@ -32,7 +33,9 @@ formOverlay.addEventListener("submit", async (e) => {
 
   data = await makeCallToAPI("", "", "POST", username);
 
+  if (data) removeLoader(dots);
   renderServerMessage(data);
+  data = "";
 });
 
 formChatbox.addEventListener("submit", async (e) => {
@@ -41,6 +44,9 @@ formChatbox.addEventListener("submit", async (e) => {
   let clientMessage = e.target.elements["chatbox-input"].value;
 
   if (clientMessage) renderMessage(clientMessage);
+
+  loading(data, renderLoader);
+  const dots = document.querySelector(".dots");
 
   if (
     Number(clientMessage) > 99 ||
@@ -70,10 +76,12 @@ formChatbox.addEventListener("submit", async (e) => {
       data = await makeCallToAPI(clientMessage);
     }
 
+    if (data) removeLoader(dots);
     renderServerMessage(data);
 
     if (clientMessage == "1") present_id = clientMessage;
   }
+  data = "";
 });
 
 function showMenu() {
@@ -130,6 +138,14 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
       message: `The server is down at this time, please try again later`,
     });
   }
+}
+
+function renderLoader(markup) {
+  main.insertAdjacentHTML("afterbegin", markup);
+}
+
+function removeLoader(element) {
+  main.removeChild(element);
 }
 
 function renderServerMessage(data) {
@@ -231,4 +247,37 @@ function displayData(data) {
 
     return div.innerHTML;
   }
+}
+
+// STRICTLY CLIENT SIDE
+
+const themeIcon = document.querySelector(".nav-theme-icon");
+
+themeIcon.addEventListener("click", toggletheme);
+
+function toggletheme() {
+  themeIcon.children[1].textContent =
+    themeIcon.children[1].textContent == "Light mode"
+      ? "Dark mode"
+      : "Light mode";
+  if (themeIcon.children[1].textContent == "Dark mode") {
+    themeIcon.children[0].classList.remove("fa-sun");
+    themeIcon.children[0].classList.add("fa-moon");
+    document.documentElement.classList.add("dark");
+  } else {
+    themeIcon.children[0].classList.remove("fa-moon");
+    themeIcon.children[0].classList.add("fa-sun");
+    document.documentElement.classList.remove("dark");
+  }
+}
+
+function loading(data, func) {
+  const markup = `
+    <div class="dots">
+        <span class="dot dot-1"></span>
+        <span class="dot dot-2"></span>
+        <span class="dot dot-3"></span>
+    </div>
+    `;
+  if (!data) func(markup);
 }
