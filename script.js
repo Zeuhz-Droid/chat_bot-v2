@@ -137,7 +137,7 @@ function renderServerMessage(data) {
   const markup = `
     <div class="msg server-message">
       <p>${data.message}</p>
-      <br/>
+      ${messageHTML ? "<br/>" : ""}
         ${messageHTML}
     </div>
   `;
@@ -161,7 +161,7 @@ function displayData(data) {
     return p.innerHTML;
   }
 
-  // constructs list of items from servere
+  // constructs list of items from server
   if (dataObj.Items) {
     const p = document.createElement("p");
     dataObj.Items.forEach((el) => {
@@ -194,7 +194,6 @@ function displayData(data) {
   if (dataObj.order) {
     const div = document.createElement("div");
     let count = 0;
-    console.log(dataObj.order);
 
     const { itemsCount, items, amount } = dataObj.order;
 
@@ -203,7 +202,6 @@ function displayData(data) {
           <p>${itemsCount} item(s) selected</p>
           <span>Total Amount: $${amount}</span>
         </div>
-        <br/>
       `;
     div.insertAdjacentHTML("beforeend", markup);
 

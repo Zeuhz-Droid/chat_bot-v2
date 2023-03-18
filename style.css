@@ -101,6 +101,10 @@ body {
   overflow-x: hidden;
 }
 
+.nav-list .nav-icon-theme {
+  transition: all 0.3s;
+}
+
 .show-menu {
   top: 0;
   right: 0%;
@@ -114,7 +118,7 @@ body {
 /*  MAIN SECTION FOR CLIENT AND SERVER*/
 .main {
   margin: auto;
-  height: calc(100vh - 8rem - 7rem);
+  height: calc(100vh - 8rem - 6rem);
   max-height: 73vh;
   padding: 0 3rem;
   padding-bottom: 2rem;
