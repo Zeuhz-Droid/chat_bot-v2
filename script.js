@@ -41,12 +41,12 @@ formChatbox.addEventListener("submit", async (e) => {
   // 1.) run input validation on client input
   let clientMessage = e.target.elements["chatbox-input"].value;
 
-  renderMessage(clientMessage);
+  if (clientMessage) renderMessage(clientMessage);
 
   if (
-    !clientMessage ||
     Number(clientMessage) > 99 ||
-    (clientMessage > 10 && clientMessage < 97)
+    (clientMessage > 10 && clientMessage < 97) ||
+    isNaN(clientMessage)
   ) {
     renderServerMessage({
       message: `Please make a request using bot instructions`,
