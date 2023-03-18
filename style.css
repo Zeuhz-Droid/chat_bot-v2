@@ -1,7 +1,23 @@
 :root {
-  --Background: hsl(0, 0%, 95%);
-  --Color: hsl(200, 15%, 8%);
+  --Header-color: hsl(0, 0%, 89%);
+  --Header-background-color: #8e8e8e77;
+  --Body-color: hsl(200, 15%, 8%);
   --Hover-Color: #747bff;
+  --server-text-color: #ffffff;
+  --server-background-text-color: #246a73;
+  --client-text-color: #ffffff;
+  --client-background-text-color: #383838;
+}
+
+:root.dark {
+  --Header-color: hsl(95%, 0%, 0%);
+  --Header-background-color: #35897e;
+  --Body-color: rgb(242, 242, 242);
+  --Hover-Color: #747bff;
+  --server-text-color: #000000;
+  --server-background-text-color: #ffffff;
+  --client-text-color: #000000;
+  --client-background-text-color: #e0f6ca;
 }
 
 *,
@@ -25,7 +41,7 @@ body {
   position: fixed;
   overflow-x: hidden;
   color: var(--Color);
-  background-color: var(--Background);
+  background-color: var(--Body-color);
 }
 
 .show {
@@ -42,9 +58,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 2rem 3rem;
-  color: var(--Background);
-  background-color: var(--Color);
-  opacity: 0.9;
+  color: var(--Header-color);
+  background-color: var(--Header-background-color);
 }
 
 .header-logo {
@@ -59,7 +74,7 @@ body {
 
 .btn-menu {
   font-size: 2rem;
-  color: var(--Background);
+  color: var(--Header-color);
   background-color: inherit;
 }
 
@@ -79,10 +94,9 @@ body {
   align-items: center;
   gap: 2rem;
   z-index: 3;
-  color: var(--Color);
-  background-color: var(--Background);
+  color: hsl(200, 15%, 8%);
+  background-color: hsl(0, 0%, 89%);
   position: absolute;
-  box-shadow: 0.2px 0.1px 3px 0.2px var(--Color);
   transition: all 0.3s ease-in;
   overflow-x: hidden;
 }
@@ -100,14 +114,13 @@ body {
 /*  MAIN SECTION FOR CLIENT AND SERVER*/
 .main {
   margin: auto;
-  height: calc(100vh - 8rem - 8rem);
+  height: calc(100vh - 8rem - 7rem);
   max-height: 73vh;
   padding: 0 3rem;
   padding-bottom: 2rem;
   display: flex;
   flex-direction: column-reverse;
   gap: 1rem;
-  color: #ffffff;
   background-color: var(--Color);
   overflow-x: hidden;
   -ms-overflow-style: none;
@@ -127,13 +140,17 @@ body {
 }
 
 .client-message {
+  color: var(--client-text-color);
   align-self: flex-end;
-  background-color: #8a8a8a;
+  background-color: var(--client-background-text-color);
   transition: all 1s ease-in-out;
+  border: 1px solid #cacaca77;
 }
 
 .server-message {
-  background-color: #246a73;
+  color: var(--server-text-color);
+  background-color: var(--server-background-text-color);
+  border: 1px solid #cacaca77;
 }
 
 .footer {
@@ -144,7 +161,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--Color);
+  background-color: var(--Header-background-color);
 }
 
 .chatbox {
@@ -153,12 +170,12 @@ body {
   display: flex;
   border-radius: 1rem;
   overflow: hidden;
-  border: 1px solid var(--Background);
+  border: 1px solid var(--Header-color);
 }
 
 .chatbox-input,
 .chatbox-input::placeholder {
-  color: var(--Background);
+  color: var(--Header-color);
 }
 
 .chatbox-input {
@@ -167,7 +184,7 @@ body {
   border: none;
   width: 80%;
   padding: 1rem 2rem;
-  background-color: inherit;
+  background-color: var(--Body-color);
 }
 
 .chatbox-input::placeholder {
@@ -181,7 +198,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 1px solid var(--Color);
+  color: #000000;
+  border-left: 1px solid var(--Header-background-color);
 }
 
 .input-board {
@@ -189,7 +207,7 @@ body {
   height: auto;
   color: var(--Color);
   padding: 2rem;
-  background-color: var(--Background);
+  background-color: var(--Header-color);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -200,7 +218,7 @@ body {
 .form {
   display: flex;
   justify-content: space-between;
-  border: 1px solid var(--Color);
+  border: 1px solid var(--Body-color);
 }
 
 .form-input {
@@ -213,8 +231,8 @@ body {
 
 .btn-send-overlay {
   width: 22%;
-  color: var(--Background);
-  background-color: var(--Color);
+  color: var(--Header-color);
+  background-color: var(--Body-color);
 }
 
 .overlay {
