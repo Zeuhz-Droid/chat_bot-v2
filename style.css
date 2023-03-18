@@ -119,7 +119,7 @@ body {
 .main {
   margin: auto;
   height: calc(100vh - 8rem - 5rem);
-  max-height: 77vh;
+  max-height: 75vh;
   padding: 0 3rem;
   padding-bottom: 2rem;
   display: flex;
