@@ -101,6 +101,7 @@ async function makeCallToAPI(id = "", endpoint = "", method = "GET", username) {
   try {
     const options = {
       method,
+      mode: "cors",
       credentials: "include",
       withCredentials: true,
       headers: {
