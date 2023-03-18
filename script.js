@@ -52,7 +52,8 @@ formChatbox.addEventListener("submit", async (e) => {
   if (
     Number(clientMessage) > 99 ||
     (clientMessage > numOfServerItems && clientMessage < 97) ||
-    isNaN(clientMessage)
+    isNaN(clientMessage) ||
+    (!present_id && clientMessage != 1)
   ) {
     setTimeout(async () => {
       removeLoader(dots);
