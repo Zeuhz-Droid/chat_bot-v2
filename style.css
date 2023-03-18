@@ -118,6 +118,8 @@ body {
 /*  MAIN SECTION FOR CLIENT AND SERVER*/
 .main {
   margin: auto;
+  height: calc(100vh - 8rem - 5rem);
+  max-height: 77vh;
   padding: 0 3rem;
   padding-bottom: 2rem;
   display: flex;
@@ -156,10 +158,10 @@ body {
 }
 
 .footer {
-  position: absolute;
+  position: relative;
   width: 100vw;
   height: 8rem;
-  bottom: 5rem;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
