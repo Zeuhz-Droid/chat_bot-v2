@@ -54,11 +54,17 @@ formChatbox.addEventListener("submit", async (e) => {
     (clientMessage > numOfServerItems && clientMessage < 97) ||
     isNaN(clientMessage)
   ) {
-    setTimeout(() => {
+    setTimeout(async () => {
       renderServerMessage({
         message: `Please make a request using bot instructions`,
       });
       removeLoader(dots);
+      loading(data, renderLoader);
+      const dotsAgain = document.querySelector(".dots");
+      removeLoader(dotsAgain);
+      renderServerMessage({
+        message: `a. Select 1 to Place an order <br/> b. Select 99 to checkout order <br/> c. Select 98 to see order history <br/> d. Select 97 to see current order <br/> e. Select 0 to cancel order.`,
+      });
     }, 1500);
     e.target.elements["chatbox-input"].value = "";
     return;
